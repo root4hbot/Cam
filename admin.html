@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ترحيب أبو عمر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            font-family: 'Cairo', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .container {
+            background: #2d2d2d;
+            padding: 2rem 4rem;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+            border: 1px solid #404040;
+        }
+
+        .welcome-text {
+            font-size: 2.5em;
+            margin: 0;
+            background: linear-gradient(45deg, #666, #999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .welcome-text::after {
+            content: '';
+            display: block;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #666, transparent);
+            margin: 15px auto;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+
+        .decoration-line {
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, #4a4a4a, #7a7a7a, #4a4a4a);
+            margin: 30px auto;
+        }
+
+        .special-text {
+            font-size: 1.2em;
+            color: #a0a0a0;
+            margin-top: 20px;
+            text-shadow: 0 0 8px rgba(160,160,160,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="decoration-line"></div>
+        
+        <h1 class="welcome-text">
+            <span class="emoji">😁</span>
+            أبو عمر يُرحب بِك
+        </h1>
+        
+        <div class="decoration-line"></div>
+        
+        <p class="special-text">
+            في عالم الألوان السوداوية<br>
+            حيث الجمال يختفي في التفاصيل
+        </p>
+    </div>
+</body>
+</html>

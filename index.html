@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة تسجيل الدخول</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- نموذج تسجيل الدخول -->
+    <div class="container">
+        <div id="loginFormContainer">
+            <h2>تسجيل الدخول</h2>
+            <form id="loginForm">
+                <label for="username">اسم المستخدم:</label>
+                <input type="text" id="loginUsername" name="username" required>
+
+                <label for="password">كلمة المرور:</label>
+                <input type="password" id="loginPassword" name="password" required>
+
+                <button type="submit">تسجيل الدخول</button>
+            </form>
+            <p id="loginErrorMessage" class="error-message"></p>
+            <p class="switch-form" id="switchToRegister">إنشاء حساب جديد؟</p>
+        </div>
+
+        <!-- نموذج إنشاء حساب -->
+        <div id="registerFormContainer" class="hidden">
+            <h2>إنشاء حساب جديد</h2>
+            <form id="registerForm">
+                <label for="newUsername">اسم المستخدم:</label>
+                <input type="text" id="newUsername" name="username" required>
+
+                <label for="newPassword">كلمة المرور:</label>
+                <input type="password" id="newPassword" name="password" required>
+
+                <button type="submit">إنشاء الحساب</button>
+            </form>
+            <p id="registerErrorMessage" class="error-message"></p>
+            <p class="switch-form" id="switchToLogin">هل لديك حساب؟ تسجيل الدخول</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
